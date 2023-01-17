@@ -51,7 +51,12 @@
                             <td>{{$employee->address}}</td>
                             <td>
                                 <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-primary btn-sm">Edit</a>    
-                                <a href="#" class="btn btn-danger btn-sm">Delete</a>    
+                                <a href="#" onclick="deleteEmployee({{ $employee->id }})" class="btn btn-danger btn-sm">Delete</a>
+                                
+                                <from action="{{route('employees.destroy',$employee->id)}}" method="post">
+                                  @csrf
+                                  @method('delete')
+                                </from>
                             </td>
                           </tr>
                           @endforeach
@@ -73,3 +78,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<script>
+  function deleteEmployee(id){
+       if(confirm("Are you sure you want to delete?")){
+
+       }
+  }
+</script>

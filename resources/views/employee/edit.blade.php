@@ -19,29 +19,36 @@
                       <a href="{{route('employees.index')}}" class="btn btn-primary">Back</a>
                    </div>
                </div>
-               <form action="{{route('employees.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('employees.update',$employee->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                <div class="card border-0 shadow-lg">
                   <div class="card-body">
                         <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" required>
+                        <input type="text" class="form-control" name="name" id="name" value="{{$employee->name}}" required>
                         </div>
                   
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+                            <input type="text" class="form-control" name="email" id="email" value="{{$employee->email}}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="4" placeholder="Enter Address"></textarea>
+                            <input class="form-control" type="text" name="address" id="address"  value="{{$employee->address}}">
                         </div>
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
-                            <input type="file" name="image" class="form-control" required>
+                            <input type="file" name="image" class="form-control">
+
+                            @if($employee->image != '' && file_exists(public_path().'/uploads/employees/'.$employee->image))
+
+                                <img src="{{asset('uploads/employees/'.$employee->image)}}" alt="" width="100" height="100">
+                              
+                                @endif
                         </div>
                  </div>
                </div>
